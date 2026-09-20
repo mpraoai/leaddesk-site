@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Farmland Lead Leak Check — a 10 point self audit for land dealers in India</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#0F6B6B;      /* Deep Teal  — accent */
+    --sand:#D9C7A7;      /* Warm Sand  — labels, quiet lines */
+    --charcoal:#2B2B2B;  /* Charcoal   — dark band */
+    --cream:#F7F3EC;     /* Cream      — page ground */
+    --ink:#1A1A1A;       /* Near Black — body text */
+  }
+  *{box-sizing:border-box}
+  @page{size:A4;margin:12mm}
+  html,body{margin:0;padding:0;background:var(--cream);color:var(--ink);
+    font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  .sheet{max-width:196mm;margin:0 auto;padding:8mm 7mm}
+  header{background:var(--charcoal);color:var(--cream);border-radius:12px;padding:18px 20px}
+  .brand{display:flex;align-items:center;gap:10px;margin:0 0 12px}
+  .brand img{height:34px;width:34px;border-radius:8px;object-fit:cover}
+  .brand .wordmark{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:20px;letter-spacing:-0.02em}
+  .brand .wordmark span{color:var(--sand)}
+  h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:30px;line-height:1.08;letter-spacing:-0.02em;margin:0 0 6px}
+  header .who{color:var(--sand);font-size:12.5px;margin:0}
+  .lede{display:grid;grid-template-columns:1.6fr 1fr;gap:14px;margin:14px 0 0;align-items:start}
+  .lede p{margin:0 0 8px;font-size:13px;line-height:1.5}
+  .lede .punch{font-family:Fraunces,Georgia,serif;font-size:15px;line-height:1.35;color:var(--ink)}
+  .how{background:var(--sand);border-radius:10px;padding:12px 14px}
+  .how h2{font-family:Fraunces,Georgia,serif;font-size:15px;margin:0 0 6px}
+  .how p{margin:0;font-size:12.5px;line-height:1.5}
+  .how .mark{display:inline-block;margin-top:8px;font-weight:700;color:var(--teal)}
+  .items{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;margin:14px 0 0}
+  .item{display:grid;grid-template-columns:auto 1fr;gap:9px;break-inside:avoid;page-break-inside:avoid;
+    border-bottom:1px solid var(--sand);padding:0 0 9px}
+  .num{font-family:Fraunces,Georgia,serif;font-size:15px;color:var(--teal);line-height:1.2}
+  .item .what{margin:0 0 3px;font-size:13px;font-weight:600;line-height:1.35}
+  .item .fix{margin:0;font-size:12px;line-height:1.4;color:var(--charcoal)}
+  .item .fix b{color:var(--teal)}
+  .tickbox{grid-column:2;display:inline-flex;align-items:center;gap:6px;margin-top:5px;font-size:11px;color:var(--charcoal);cursor:pointer}
+  .tickbox input{width:14px;height:14px;margin:0;accent-color:var(--teal);cursor:pointer}
+  .band.active{outline:2.5px solid var(--teal);outline-offset:2px}
+  .bands{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0 0}
+  .band{background:var(--sand);border-radius:10px;padding:11px 13px;font-size:11.5px;line-height:1.45}
+  .band b{display:block;font-family:Fraunces,Georgia,serif;font-size:19px;color:var(--teal);margin:0 0 2px}
+  .band strong{display:block;font-size:12px;margin:0 0 3px}
+  .close{margin-top:16px;border-top:3px solid var(--teal);padding-top:11px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  .close .made{font-size:12.5px}
+  .close .made b{font-family:Fraunces,Georgia,serif;font-size:14px}
+  .close .where{font-size:12.5px;color:var(--charcoal)}
+  @media (max-width:760px){
+    .lede{grid-template-columns:1fr}
+    .items{grid-template-columns:1fr}
+    .bands{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header>
+    <div class="brand">
+      <img src="images/logo-mark.jpeg" alt="LeadDesk logo">
+      <span class="wordmark">LeadDesk<span>.</span></span>
+    </div>
+    <h1>The Farmland Lead Leak Check</h1>
+    <p class="who">A 10 point self audit for land dealers and farmland sellers across India. Read it in five minutes, score yourself honestly.</p>
+  </header>
+
+  <div class="lede">
+    <div>
+      <p class="punch">Land does not go cold because the ad failed. It goes cold because nobody called the buyer back.</p>
+      <p>Farmland enquiries come from YouTube, Instagram, ads and walk ins. A buyer walks the plot, says he will tell you, and six months later nothing has moved. The plot sits, the farmer waits, and your money stays locked. This check finds the leak in your desk, one line at a time.</p>
+    </div>
+    <div class="how">
+      <h2>How to score</h2>
+      <p>For each line, tick it only if it is true on a normal working day. <b>Yes = 1. Not yet = 0.</b> Add your ten marks at the end.</p>
+      <span class="mark">My score: &nbsp;<b id="score">0</b> / 10</span>
+    </div>
+  </div>
+
+  <div class="items">
+
+    <div class="item">
+      <span class="num">01</span>
+      <div>
+        <p class="what">Every enquiry from YouTube, Instagram, ads and walk ins lands in one place.</p>
+        <p class="fix"><b>Fix today:</b> choose one list and make it the only place an enquiry lives.</p>
+      </div>
+      <label class="tickbox"><input type="checkbox" class="ck"> Yes = 1</label>
+    </div>
+
+    <div class="item">
+      <span class="num">02</span>
+      <div>
+        <p class="what">Every new enquiry gets a reply or a call the same day.</p>
+        <p class="fix"><b>Fix today:</b> put one person on replies, even if you are out on site visits.</p>
+      </div>
+      <label class="tickbox"><input type="checkbox" class="ck"> Yes = 1</label>
+    </div>
+
+    <div class="item">
+      <span class="num">03</span>
+      <div>
+        <p class="what">Every buyer who visited a plot is written down with the date.</p>
+        <p class="fix"><b>Fix today:</b> start a visit log today, name, plot, date and what he said.</p>
+      </div>
+      <label class="tickbox"><input type="checkbox" class="ck"> Yes = 1</label>
+    </div>
+
+    <div class="item">
+      <span class="num">04</span>
+      <div>
+        <p class="what">You know this month's enquiry count and how many became site visits.</p>
+        <p class="fix"><b>Fix today:</b> write both numbers down at the end of the day.</p>
+      </div>
+      <label class="tickbox"><input type="checkbox" class="ck"> Yes = 1</label>
+    </div>
+
+    <div class="item">
+      <span class="num">05</span>
+      <div>
+        <p class="what">Buyers who went quiet are called again at day 7, day 30 and day 90.</p>
+        <p class="fix"><b>Fix today:</b> set those three dates the moment a buyer visits a plot.</p>
+      </div>
+      <label class="tickbox"><input type="checkbox" class="ck"> Yes = 1</label>
+    </div>
+
+    <div class="item">
+      <span class="num">06</span>
+      <div>
+        <p class="what">Every plot has its papers checked before you show it.</p>
+        <p class="fix"><b>Fix today:</b> one checklist per plot, patta, EC, survey number, mutation, boundaries.</p>
+      </div>
+      <label class="tickbox"><input type="checkbox" class="ck"> Yes = 1</label>
+    </div>
+
+    <div class="item">
+      <span class="num">07</span>
+      <div>
+        <p class="what">You can see which plot has been unsold the longest, and why.</p>
+        <p class="fix"><b>Fix today:</b> add two columns, days listed, and the reason it is stuck.</p>
+      </div>
+      <label class="tickbox"><input type="checkbox" class="ck"> Yes = 1</label>
+    </div>
+
+    <div class="item">
+      <span class="num">08</span>
+      <div>
+        <p class="what">Nothing about a buyer sits only in a telecaller's head or a WhatsApp chat.</p>
+        <p class="fix"><b>Fix today:</b> if it is not on the board, treat it as not done.</p>
+      </div>
+      <label class="tickbox"><input type="checkbox" class="ck"> Yes = 1</label>
+    </div>
+
+    <div class="item">
+      <span class="num">09</span>
+      <div>
+        <p class="what">The morning starts from the list, not from missed calls.</p>
+        <p class="fix"><b>Fix today:</b> first twenty minutes, call the oldest waiting buyer first.</p>
+      </div>
+      <label class="tickbox"><input type="checkbox" class="ck"> Yes = 1</label>
+    </div>
+
+    <div class="item">
+      <span class="num">10</span>
+      <div>
+        <p class="what">You know your real conversion, visitors against registrations.</p>
+        <p class="fix"><b>Fix today:</b> count it once a month, one line, so you stop guessing.</p>
+      </div>
+      <label class="tickbox"><input type="checkbox" class="ck"> Yes = 1</label>
+    </div>
+
+  </div>
+
+  <div class="bands">
+    <div class="band">
+      <b>8&ndash;10</b>
+      <strong>Your desk is holding.</strong>
+      Tighten lines 3 and 5, and update the visit log every evening.
+    </div>
+    <div class="band">
+      <b>4&ndash;7</b>
+      <strong>Buyers are going quiet on you.</strong>
+      Fix lines 1, 3 and 5 this week, before you shoot another video.
+    </div>
+    <div class="band">
+      <b>0&ndash;3</b>
+      <strong>You are losing enquiries you paid for.</strong>
+      Start lines 1, 2 and 3 today. One list, same day reply, a visit log.
+    </div>
+  </div>
+
+  <div class="close">
+    <div class="made"><b>Made by LeadDesk.</b> Farmland enquiry intake, follow up board and a daily market digest for land dealers across India.</div>
+    <div class="where">[Your name] &nbsp;·&nbsp; [your phone] &nbsp;·&nbsp; [your email]</div>
+  </div>
+
+</div>
+
+<script>
+  const boxes = Array.from(document.querySelectorAll(".ck"));
+  const scoreEl = document.getElementById("score");
+  const bands = Array.from(document.querySelectorAll(".band"));
+  function update(){
+    const n = boxes.filter((b) => b.checked).length;
+    scoreEl.textContent = n;
+    bands.forEach((b, i) => {
+      const match = (n >= 8 && i === 0) || (n >= 4 && n <= 7 && i === 1) || (n <= 3 && i === 2);
+      b.classList.toggle("active", match);
+    });
+  }
+  boxes.forEach((b) => b.addEventListener("change", update));
+  update();
+</script>
+</body>
+</html>
