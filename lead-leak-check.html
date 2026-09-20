@@ -41,8 +41,9 @@
   .item .what{margin:0 0 3px;font-size:13px;font-weight:600;line-height:1.35}
   .item .fix{margin:0;font-size:12px;line-height:1.4;color:var(--charcoal)}
   .item .fix b{color:var(--teal)}
-  .tickbox{grid-column:2;display:inline-flex;align-items:center;gap:6px;margin-top:5px;font-size:11px;color:var(--charcoal)}
-  .tickbox i{width:13px;height:13px;border:1.5px solid var(--teal);border-radius:3px;display:inline-block}
+  .tickbox{grid-column:2;display:inline-flex;align-items:center;gap:6px;margin-top:5px;font-size:11px;color:var(--charcoal);cursor:pointer}
+  .tickbox input{width:14px;height:14px;margin:0;accent-color:var(--teal);cursor:pointer}
+  .band.active{outline:2.5px solid var(--teal);outline-offset:2px}
   .bands{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0 0}
   .band{background:var(--sand);border-radius:10px;padding:11px 13px;font-size:11.5px;line-height:1.45}
   .band b{display:block;font-family:Fraunces,Georgia,serif;font-size:19px;color:var(--teal);margin:0 0 2px}
@@ -78,7 +79,7 @@
     <div class="how">
       <h2>How to score</h2>
       <p>For each line, tick it only if it is true on a normal working day. <b>Yes = 1. Not yet = 0.</b> Add your ten marks at the end.</p>
-      <span class="mark">My score: &nbsp;___ / 10</span>
+      <span class="mark">My score: &nbsp;<b id="score">0</b> / 10</span>
     </div>
   </div>
 
@@ -90,7 +91,7 @@
         <p class="what">Every enquiry lands in one place.</p>
         <p class="fix"><b>Fix today:</b> choose one sheet or board and make it the only place an enquiry lives.</p>
       </div>
-      <span class="tickbox"><i></i> Yes = 1</span>
+      <label class="tickbox"><input type="checkbox" class="ck"> Yes = 1</label>
     </div>
 
     <div class="item">
@@ -99,7 +100,7 @@
         <p class="what">You can see today's enquiries in one list.</p>
         <p class="fix"><b>Fix today:</b> pull every source — portal, hoarding, ad, walk-in — into that one list.</p>
       </div>
-      <span class="tickbox"><i></i> Yes = 1</span>
+      <label class="tickbox"><input type="checkbox" class="ck"> Yes = 1</label>
     </div>
 
     <div class="item">
@@ -108,7 +109,7 @@
         <p class="what">Every enquiry gets a callback within 10 minutes in working hours.</p>
         <p class="fix"><b>Fix today:</b> put one person on first-call duty and set a 10-minute rule.</p>
       </div>
-      <span class="tickbox"><i></i> Yes = 1</span>
+      <label class="tickbox"><input type="checkbox" class="ck"> Yes = 1</label>
     </div>
 
     <div class="item">
@@ -117,7 +118,7 @@
         <p class="what">You know today's enquiry count and today's callback count.</p>
         <p class="fix"><b>Fix today:</b> write both numbers down at the end of the day.</p>
       </div>
-      <span class="tickbox"><i></i> Yes = 1</span>
+      <label class="tickbox"><input type="checkbox" class="ck"> Yes = 1</label>
     </div>
 
     <div class="item">
@@ -126,7 +127,7 @@
         <p class="what">A failed entry shows itself instead of disappearing.</p>
         <p class="fix"><b>Fix today:</b> add a visible error branch so a lead that fails to save is flagged, not lost.</p>
       </div>
-      <span class="tickbox"><i></i> Yes = 1</span>
+      <label class="tickbox"><input type="checkbox" class="ck"> Yes = 1</label>
     </div>
 
     <div class="item">
@@ -135,7 +136,7 @@
         <p class="what">Every enquiry has a named owner and a next step with a date.</p>
         <p class="fix"><b>Fix today:</b> add two columns — owner, next step date — and fill them in.</p>
       </div>
-      <span class="tickbox"><i></i> Yes = 1</span>
+      <label class="tickbox"><input type="checkbox" class="ck"> Yes = 1</label>
     </div>
 
     <div class="item">
@@ -144,7 +145,7 @@
         <p class="what">Unanswered leads get three follow-ups: day 1, day 3, day 7.</p>
         <p class="fix"><b>Fix today:</b> set the three dates the moment the lead is created.</p>
       </div>
-      <span class="tickbox"><i></i> Yes = 1</span>
+      <label class="tickbox"><input type="checkbox" class="ck"> Yes = 1</label>
     </div>
 
     <div class="item">
@@ -153,7 +154,7 @@
         <p class="what">Nothing sits only in a telecaller's head.</p>
         <p class="fix"><b>Fix today:</b> if it is not on the board, treat it as not done.</p>
       </div>
-      <span class="tickbox"><i></i> Yes = 1</span>
+      <label class="tickbox"><input type="checkbox" class="ck"> Yes = 1</label>
     </div>
 
     <div class="item">
@@ -162,7 +163,7 @@
         <p class="what">The desk starts the morning on the board, not on the call log.</p>
         <p class="fix"><b>Fix today:</b> first twenty minutes, work down the board from the top.</p>
       </div>
-      <span class="tickbox"><i></i> Yes = 1</span>
+      <label class="tickbox"><input type="checkbox" class="ck"> Yes = 1</label>
     </div>
 
     <div class="item">
@@ -171,7 +172,7 @@
         <p class="what">Your team knows what the market is doing before the first call.</p>
         <p class="fix"><b>Fix today:</b> share one short market update with the team each morning.</p>
       </div>
-      <span class="tickbox"><i></i> Yes = 1</span>
+      <label class="tickbox"><input type="checkbox" class="ck"> Yes = 1</label>
     </div>
 
   </div>
@@ -200,5 +201,21 @@
   </div>
 
 </div>
+
+<script>
+  const boxes = Array.from(document.querySelectorAll(".ck"));
+  const scoreEl = document.getElementById("score");
+  const bands = Array.from(document.querySelectorAll(".band"));
+  function update(){
+    const n = boxes.filter((b) => b.checked).length;
+    scoreEl.textContent = n;
+    bands.forEach((b, i) => {
+      const match = (n >= 8 && i === 0) || (n >= 4 && n <= 7 && i === 1) || (n <= 3 && i === 2);
+      b.classList.toggle("active", match);
+    });
+  }
+  boxes.forEach((b) => b.addEventListener("change", update));
+  update();
+</script>
 </body>
 </html>
